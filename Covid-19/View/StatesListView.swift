@@ -9,18 +9,18 @@
 import SwiftUI
 
 struct StatesListView: View {
-//    @Binding private var showLoading: Bool!
-
+    //    @Binding private var showLoading: Bool!
+    
     @ObservedObject var statesVM = StatesViewModel()
     
     init() {
-        statesVM.loadData()
+        statesVM.loadStateData()
     }
-
+    
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
-                StatesListTitleView()
+                //                StatesListTitleView()
                 
                 VStack(spacing: 0) {
                     List() {
@@ -56,9 +56,9 @@ struct StatesListView: View {
             .navigationBarTitle("")
             .navigationBarHidden(true)
             
-//            if self.showLoading {
-//                ProgressView(showProgress: Binding<self.$showLoading.wrappedValue>)
-//            }
+            //            if self.showLoading {
+            //                ProgressView(showProgress: Binding<self.$showLoading.wrappedValue>)
+            //            }
         }
     }
     

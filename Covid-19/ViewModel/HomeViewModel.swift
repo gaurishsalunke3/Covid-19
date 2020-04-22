@@ -18,7 +18,7 @@ class HomeViewModel: ObservableObject {
         }
     }
     
-    @Published var countries: [Details] = [] {
+    @Published var topCountries: [Details] = [] {
         didSet {
             self.didChange.send(self)
         }
@@ -39,7 +39,7 @@ class HomeViewModel: ObservableObject {
         
         self.getUpdatedData(dispatchGroup)
         
-        self.getAllCountriesData(dispatchGroup)
+        self.getTopCountriesData(dispatchGroup)
         
         dispatchGroup.notify(queue: .main) {
             // whatever you want to do when both are done
@@ -65,7 +65,7 @@ class HomeViewModel: ObservableObject {
         //        self.countries = Details.getAllCountriesSamples()
     }
     
-    func getAllCountriesData(_ dispatchGroup: DispatchGroup) {
+    func getTopCountriesData(_ dispatchGroup: DispatchGroup) {
         let urlString = "https://corona.lmao.ninja/v2/countries"
         
         WebService().getRequest(from: urlString, dispatchGroup: dispatchGroup) { (result: Result<[Details], NetworkError>) in
@@ -77,7 +77,7 @@ class HomeViewModel: ObservableObject {
                 }
                 self.globalData?.indiaData = self.fetchIndiaData(sortedList: sortedList)
                 
-                self.countries = sortedList.takeElements(elementCount: 10)
+                self.topCountries = sortedList.takeElements(elementCount: 10)
                 
             case .failure(let error):
                 print(error.localizedDescription)
@@ -86,7 +86,7 @@ class HomeViewModel: ObservableObject {
     }
     
     func fetchIndiaData(sortedList: [Details]) -> Details? {
-        return sortedList.filter{ $0.country == "India" }.first
+        return sortedList.filter{ $0.countryName == "India" }.first
     }
     
     // Fetch India Contact details

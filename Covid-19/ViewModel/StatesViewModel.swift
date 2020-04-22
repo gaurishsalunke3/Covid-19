@@ -12,6 +12,12 @@ import Combine
 class StatesViewModel: ObservableObject {
     var didChange = PassthroughSubject<StatesViewModel, Never>()
     
+    @Published var countries: [Details]? {
+        didSet {
+            self.didChange.send(self)
+        }
+    }
+
     @Published var states: [Regional]? {
         didSet {
             self.didChange.send(self)
@@ -25,7 +31,28 @@ class StatesViewModel: ObservableObject {
         
     }
     
-    func loadData() {
+    func loadCountryData() {
+        self.getAllCountriesData()
+    }
+    
+    private func getAllCountriesData() {
+        let urlString = "https://corona.lmao.ninja/v2/countries"
+        
+        WebService().getRequest(from: urlString) { (result: Result<[Details], NetworkError>) in
+            switch result {
+            case .success(let data):
+                let unsortedList = data
+                self.countries = unsortedList.sorted {
+                    $0.cases > $1.cases
+                }
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+
+    func loadStateData() {
         
         let dispatchGroup = DispatchGroup()
         
@@ -58,7 +85,7 @@ class StatesViewModel: ObservableObject {
         }
     }
     
-    func getAllStatesCases(_ dispatchGroup: DispatchGroup) {
+    private func getAllStatesCases(_ dispatchGroup: DispatchGroup) {
         let urlString = "https://api.rootnet.in/covid19-in/stats/latest"
         
         WebService().getRequest(from: urlString, dispatchGroup: dispatchGroup) { (result: Result<DataResponse, NetworkError>) in
@@ -72,7 +99,7 @@ class StatesViewModel: ObservableObject {
         }
     }
     
-    func getAllSatesContacts(_ dispatchGroup: DispatchGroup) {
+    private func getAllSatesContacts(_ dispatchGroup: DispatchGroup) {
         let urlString = "https://api.rootnet.in/covid19-in/contacts"
         
         WebService().getRequest(from: urlString, dispatchGroup: dispatchGroup) { (result: Result<ContactResponse, NetworkError>) in
@@ -86,7 +113,7 @@ class StatesViewModel: ObservableObject {
         }
     }
     
-    func getAllStatesHospitals(_ dispatchGroup: DispatchGroup) {
+    private func getAllStatesHospitals(_ dispatchGroup: DispatchGroup) {
         let urlString = "https://api.rootnet.in/covid19-in/stats/hospitals"
         
         WebService().getRequest(from: urlString, dispatchGroup: dispatchGroup) { (result: Result<HospitalResponse, NetworkError>) in

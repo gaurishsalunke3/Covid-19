@@ -20,7 +20,7 @@ struct ContentView: View {
                     }
                 } else if viewRouter.currentViewIndex == 1 {
                     NavigationView {
-                        StatesListView()
+                        ItemListView()
                     }
                 } else if viewRouter.currentViewIndex == 2 {
                     NavigationView {

@@ -7,23 +7,71 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "254A3DDE-EDBF-4AB3-80CA-29F67543B6E9"
+            uuid = "561B281B-1C75-4EA0-8897-F2DD7F9EAA20"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Covid-19/ViewModel/HomeViewModel.swift"
+            filePath = "Covid-19/ViewModel/NewsViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
-            landmarkName = "loadSummaryData()"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "getNotifications()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "561B281B-1C75-4EA0-8897-F2DD7F9EAA20 - e809c1a82086907"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Covid_19.NewsViewModel.getNotifications() -&gt; ()"
+                  moduleName = "Covid-19"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gaurishsalunke/Coding/iOS/SwiftUI%20Tutorials/Covid-19/Covid-19/ViewModel/NewsViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "75">
+               </Location>
+               <Location
+                  uuid = "561B281B-1C75-4EA0-8897-F2DD7F9EAA20 - 7bf23c8b5b62f282"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Covid_19.NotificationResponse, Covid_19.NetworkError&gt;) -&gt; () in Covid_19.NewsViewModel.getNotifications() -&gt; ()"
+                  moduleName = "Covid-19"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gaurishsalunke/Coding/iOS/SwiftUI%20Tutorials/Covid-19/Covid-19/ViewModel/NewsViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "29"
+                  endingLineNumber = "29"
+                  offsetFromSymbolStart = "284">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0AEE196C-1F96-4B08-89E4-FE51C5B7A994"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Covid-19/ViewModel/NewsViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "getNotifications()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "90EA4191-7BAE-4911-BC95-1EB56517BA05"
+            uuid = "AD9A4348-834E-459E-823A-78D6E94D3967"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -33,22 +81,6 @@
             startingLineNumber = "53"
             endingLineNumber = "53"
             landmarkName = "getRequest(from:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "42706B07-BF7D-4622-956D-1AC7EB74CAC9"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Covid-19/Utility/WebService.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
-            landmarkName = "getRequest(from:dispatchGroup:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

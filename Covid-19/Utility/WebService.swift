@@ -54,6 +54,8 @@ class WebService {
                     if let response = response {
                         print(response)
                         completion(.success(response))
+                    } else {
+                        completion(.failure(.requestFailed(.error("Unknown Error. Please try again."))))
                     }
                 } else if error != nil {
                     // any sort of network failure

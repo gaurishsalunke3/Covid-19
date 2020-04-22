@@ -1,26 +1,34 @@
 //
-//  StateDetailView.swift
+//  CountryDetailView.swift
 //  Covid-19
 //
-//  Created by Gaurish Salunke on 4/15/20.
+//  Created by Gaurish Salunke on 4/22/20.
 //  Copyright © 2020 Gaurish Salunke. All rights reserved.
 //
 
 import SwiftUI
 
-struct StateDetailView: View {
-    var stateDetail: Regional
+struct CountryDetailView: View {
+    var countryDetail: Details
     
     var body: some View {
         VStack {
-            StateDetailTitleView()
+            CountryDetailTitleView()
             
             HStack {
-                Text(stateDetail.stateName)
+                Text(countryDetail.countryName)
                     .font(.system(size: 26, weight: .bold, design: .rounded))
                     .foregroundColor(.black)
                 
                 Spacer()
+                
+                if countryDetail.countryInfo.countryCode != nil {
+                    Text(countryDetail.countryInfo.countryCode!.getFlag())
+                        .font(.title)
+                } else {
+                    Image(systemName: "flag")
+                        .font(.title)
+                }
             }
             .padding(.horizontal, 20)
             .padding(.top, 15)
@@ -34,53 +42,30 @@ struct StateDetailView: View {
             
             VStack(alignment: .leading, spacing: 25) {
                 HStack {
-                    Text("Confirmed Cases: ")
+                    Text("Total Cases: ")
                         .font(.headline)
                     
                     Spacer()
                     
-                    Text(stateDetail.confirmedTotalCases.getValue())
+                    Text(countryDetail.cases.getValue())
                         .font(.system(size: 22, weight: .bold, design: .rounded))
+                    
+                    Text("( + \(countryDetail.todayCases.getValue()) )*")
+                        .font(.system(size: 22, weight: .bold, design: .rounded))
+                        .foregroundColor(.red)
                 }
                 
                 HStack {
-                    Text("Confirmed Indian Cases: ")
+                    Text("Total deaths: ")
                         .font(.headline)
                     
                     Spacer()
                     
-                    Text(stateDetail.confirmedCasesIndian.getValue())
+                    Text(countryDetail.deaths.getValue())
                         .font(.system(size: 22, weight: .bold, design: .rounded))
-                }
-                
-                HStack {
-                    Text("Confirmed Foreign Cases: ")
-                        .font(.headline)
-                    
-                    Spacer()
-                    
-                    Text(stateDetail.confirmedCasesForeign.getValue())
-                        .font(.system(size: 22, weight: .bold, design: .rounded))
-                }
-                
-                HStack {
-                    Text("Active Cases: ")
-                        .font(.headline)
-                    
-                    Spacer()
-                    
-                    Text(stateDetail.activeCases.getValue())
-                        .font(.system(size: 22, weight: .bold, design: .rounded))
-                        .foregroundColor(.yellow)
-                }
-                
-                HStack {
-                    Text("Deaths: ")
-                        .font(.headline)
-                    
-                    Spacer()
-                    
-                    Text(stateDetail.deaths.getValue())
+                        .foregroundColor(.red)
+
+                    Text("( + \(countryDetail.todayDeaths.getValue()) )*")
                         .font(.system(size: 22, weight: .bold, design: .rounded))
                         .foregroundColor(.red)
                 }
@@ -91,73 +76,83 @@ struct StateDetailView: View {
                     
                     Spacer()
                     
-                    Text(stateDetail.discharged.getValue())
+                    Text(countryDetail.recovered.getValue())
                         .font(.system(size: 22, weight: .bold, design: .rounded))
                         .foregroundColor(.green)
                 }
+                
+                HStack {
+                    Text("Active cases: ")
+                        .font(.headline)
+                    
+                    Spacer()
+                    
+                    Text(countryDetail.active.getValue())
+                        .font(.system(size: 22, weight: .bold, design: .rounded))
+                        .foregroundColor(.yellow)
+                }
+                
+                HStack {
+                    Text("Critical cases: ")
+                        .font(.headline)
+                    
+                    Spacer()
+                    
+                    Text(countryDetail.critical.getValue())
+                        .font(.system(size: 22, weight: .bold, design: .rounded))
+                        .foregroundColor(.red)
+                }
+
+                HStack {
+                    Text("Tests: ")
+                        .font(.headline)
+                    
+                    Spacer()
+                    
+                    Text(countryDetail.tests.getValue())
+                        .font(.system(size: 22, weight: .bold, design: .rounded))
+                        .foregroundColor(.black)
+                }
+
+                HStack {
+                    Text("Per million cases: ")
+                        .font(.headline)
+                    
+                    Spacer()
+                    
+                    Text((countryDetail.casesPerOneMillion ?? 0).getValue())
+                        .font(.system(size: 22, weight: .bold, design: .rounded))
+                        .foregroundColor(.black)
+                }
+                
+                HStack {
+                    Text("Per million deaths: ")
+                        .font(.headline)
+                    
+                    Spacer()
+                    
+                    Text((countryDetail.deathsPerOneMillion ?? 0).getValue())
+                        .font(.system(size: 22, weight: .bold, design: .rounded))
+                        .foregroundColor(.red)
+                }
+
+                
+                HStack {
+                    Text("Per million tests: ")
+                        .font(.headline)
+                    
+                    Spacer()
+                    
+                    Text((countryDetail.testsPerOneMillion ?? 0).getValue())
+                        .font(.system(size: 22, weight: .bold, design: .rounded))
+                        .foregroundColor(.black)
+                }
+
             }
             .padding(.horizontal, 20)
             .padding(.top, 20)
             
-            Divider()
-                .padding()
-            
-            VStack {
-                HStack {
-                    Text("Hospitals")
-                        .font(.headline)
-                    
-                    Image(systemName: "plus")
-                        .font(.system(size: 24, weight: .bold, design: .rounded))
-                        .foregroundColor(.red)
-                    
-                    Spacer()
-                    
-                    Text((stateDetail.hospital?.totalHospitals ?? 0).getValue())
-                        .font(.system(size: 22, weight: .bold, design: .rounded))
-                }
-                
-                HStack {
-                    Text("Available Beds")
-                        .font(.headline)
-                    
-                    Image(systemName: "bed.double")
-                        .font(.system(size: 24, weight: .bold, design: .rounded))
-                        .foregroundColor(.black)
-                    
-                    Spacer()
-                    
-                    Text((stateDetail.hospital?.totalBeds ?? 0).getValue())
-                        .font(.system(size: 22, weight: .bold, design: .rounded))
-                }
-                
-            }
-            .padding(.horizontal, 20)
-            
             Spacer()
-            
-            if stateDetail.contact?.contactNumber != nil {
-                VStack{
-                    Button(action: {
-                        
-                    }) {
-                        HStack(spacing: 10) {
-                            Image(systemName: "phone.circle")
-                                .font(.title)
-                                .foregroundColor(.white)
-                            
-                            Text(stateDetail.contact?.contactNumber ?? "")
-                                .font(.system(size: 24, weight: .bold, design: .rounded))
-                                .foregroundColor(.white)
-                        }
-                        .padding(.horizontal, (stateDetail.contact?.contactNumber.count)! < 4 ? 50 : 20)
-                        .padding(.vertical, 15)
-                        .background(Color.green)
-                        .cornerRadius(10)
-                    }
-                }
-                .padding(.bottom, 50)
-            }
         }
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarTitle("")
@@ -165,13 +160,13 @@ struct StateDetailView: View {
     }
 }
 
-struct StateDetailView_Previews: PreviewProvider {
+struct CountryDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        StateDetailView(stateDetail: Regional(stateName: "Maharashtra", confirmedCasesIndian: 487, discharged: 42, deaths: 24, confirmedCasesForeign: 3, contact: StateContact(stateName: "Maharashtra", contactNumber: "+91-20-26127394"), hospital: StateHospital(stateName: "Maharashtra", ruralHospitals: 273, ruralBeds: 12398, urbanHospitals: 438, urbanBeds: 39048, totalHospitals: 711, totalBeds: 51446, updatedDate: "2015-12-31T00:00:00.000Z")))
+        CountryDetailView(countryDetail: Details(countryName: "USA", countryInfo: CountryInfo(countryCode: "US"), cases: 142735, todayCases: 275, deaths: 2489, todayDeaths: 5, recovered: 4562, active: 135684, critical: 2970, tests: 3861596, casesPerOneMillion: 431, deathsPerOneMillion: 8, testsPerOneMillion: 11666))
     }
 }
 
-struct StateDetailTitleView: View {    
+struct CountryDetailTitleView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
@@ -191,4 +186,3 @@ struct StateDetailTitleView: View {
         .background(Color("blueTheme").edgesIgnoringSafeArea(.top))
     }
 }
-

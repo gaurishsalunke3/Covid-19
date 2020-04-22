@@ -201,7 +201,7 @@ struct CountryView: View {
     
     init(homeVM: HomeViewModel) {
         self.homeVM = homeVM
-        self.viewRouter.x = ((self.viewRouter.screen + 15) * CGFloat((self.homeVM.countries.count - 1) / 2)) + self.adjust()
+        self.viewRouter.x = ((self.viewRouter.screen + 15) * CGFloat((self.homeVM.topCountries.count - 1) / 2)) + self.adjust()
     }
         
     var body: some View {
@@ -221,10 +221,10 @@ struct CountryView: View {
                 .offset(y: -5)
 
             
-            if self.homeVM.countries.count != 0 {
+            if self.homeVM.topCountries.count != 0 {
 //                ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 15) {
-                        ForEach(self.homeVM.countries, id:\.self) { country in
+                        ForEach(self.homeVM.topCountries, id:\.self) { country in
                             CountryCardView(countryDetail: country)
                                 .offset(x: self.viewRouter.x)
                                 .highPriorityGesture(DragGesture()
@@ -296,7 +296,7 @@ struct CountryView: View {
     }
     
     func getMid() -> Int {
-        self.homeVM.countries.count / 2
+        self.homeVM.topCountries.count / 2
     }
     
 //    func updateHeight(value : Int) {
@@ -314,7 +314,7 @@ struct CountryView: View {
 //    }
 
     func check() -> Bool{
-        if self.homeVM.countries.count % 2 == 0 {
+        if self.homeVM.topCountries.count % 2 == 0 {
             return true
         } else {
             return false
@@ -328,7 +328,7 @@ struct CountryCardView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             HStack {
-                Text(countryDetail.country)
+                Text(countryDetail.countryName)
                     .font(.system(size: 22))
                     .fontWeight(.bold)
                 

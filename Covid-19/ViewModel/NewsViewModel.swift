@@ -12,7 +12,7 @@ import Combine
 class NewsViewModel: ObservableObject {
     var didChage = PassthroughSubject<NewsViewModel, Never>()
     
-    @Published var notifications: [Notification]? {
+    @Published var notifications: [Notifications]? {
         didSet {
             self.didChage.send(self)
         }
